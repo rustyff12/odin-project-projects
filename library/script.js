@@ -1,6 +1,20 @@
 const displayBooks = document.querySelector(".display-books");
 const newBookForm = document.querySelector("#new-book-form");
 const submitBook = document.querySelector("#submit");
+const modal = document.querySelector(".modal");
+const modalBtn = document.querySelector("#modal-button");
+const close = document.querySelector(".close-modal");
+
+modalBtn.addEventListener("click", () => {
+    console.log("button clicked");
+    modal.classList.add("active");
+});
+
+close.addEventListener("click", () => {
+    console.log("close clicked");
+    modal.classList.remove("active");
+});
+
 const myLibrary = [
     {
         id: 1,
@@ -20,6 +34,7 @@ function Book(name, author, pages, hasRead) {
     this.hasRead = hasRead ? true : false;
 }
 // myLibrary.push(new Book("Sample Book", "Sample Author", 200, true));
+
 newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
 

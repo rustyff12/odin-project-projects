@@ -10,23 +10,32 @@
         <h1>Book Library</h1>
         <div class="display-books"></div>
 
-        <form id="new-book-form">
-            <label for="name">Name:</label>
-            <input id="name" type="text" />
-            <label for="author">Author:</label>
-            <input id="author" type="text" />
-            <label for="pages">Number of pages:</label>
-            <input id="pages" type="number" />
+        <button id="modal-button">Add Book</button>
 
-            <div class="read">
-                <p>Have you read it?</p>
-                <input type="radio" name="has-read" id="has-read" />
-                <label for="has-read">Yes</label>
-                <input type="radio" name="hasnt-read" id="hasnt-read" />
-                <label for="hasnt-read">No</label>
-            </div>
-            <button id="submit" type="submit">Submit</button>
-        </form>
+        <div class="modal">
+            <form id="new-book-form">
+                <div class="close-modal"><span>&times;</span></div>
+                <label for="name">Name:</label>
+                <input id="name" type="text" />
+                <label for="author">Author:</label>
+                <input id="author" type="text" />
+                <label for="pages">Number of pages:</label>
+                <input id="pages" type="number" />
+                <div class="read">
+                    <p>Have you read it?</p>
+                    <div>
+                        <input type="radio" name="has-read" id="has-read" />
+                        <label for="has-read">Yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="hasnt-read" id="hasnt-read" />
+                        <label for="hasnt-read">No</label>
+                    </div>
+                </div>
+                <button id="submit" type="submit">Submit</button>
+            </form>
+        </div>
+
         <script src="./script.js"></script>
     </body>
 </html>
