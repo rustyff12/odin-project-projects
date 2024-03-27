@@ -13,32 +13,8 @@ body {
     flex-direction: column;
 }
 
-/* body * {
-    margin: 0%;
-} */
-
 h1 {
     margin: 0 auto;
-}
-
-.display-books {
-    display: flex;
-    /* border: 1px solid white; */
-    width: 70svw;
-    height: 50svh;
-    margin: 0 auto;
-    color: white;
-    flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-
-.display-books div {
-    width: 50%;
-}
-
-.display-books ul {
-    list-style: none;
 }
 
 #modal-button {
@@ -104,4 +80,65 @@ button#submit {
     padding: 0.5rem;
     font-size: 1rem;
     width: 50%;
+}
+
+.display-books {
+    display: flex;
+    /* border: 1px solid white; */
+    width: 70svw;
+    margin: 0 auto;
+    color: white;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.display-books div {
+    width: 50%;
+    border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: column;
+}
+.delete-book {
+    background: red;
+    border: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    max-width: 100px;
+    margin: 10px auto;
+    cursor: pointer;
+}
+.display-books ul {
+    list-style: none;
+}
+.display-books li span {
+    color: green;
+}
+
+@media screen and (min-width: 768px) {
+    .display-books {
+        display: grid;
+        grid-auto-rows: auto;
+        grid-template-columns: 1fr;
+        width: 90vw;
+        background: red;
+    }
+    .display-books div {
+        width: 100%;
+        background: green;
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        /* align-items: center; */
+    }
+
+    .display-books ul {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background: yellow;
+    }
 }

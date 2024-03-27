@@ -33,7 +33,7 @@ function Book(name, author, pages, hasRead) {
     this.pages = pages;
     this.hasRead = hasRead ? true : false;
 }
-// myLibrary.push(new Book("Sample Book", "Sample Author", 200, true));
+myLibrary.push(new Book("Sample Book", "Sample Author", 200, true));
 
 newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -46,7 +46,7 @@ newBookForm.addEventListener("submit", (e) => {
     const newBook = new Book(title, author, pages, hasRead);
     addBookToLibrary(newBook);
     addToDisplay(newBook);
-
+    modal.classList.remove("active");
     newBookForm.reset();
 });
 
@@ -57,30 +57,33 @@ function addBookToLibrary(book) {
 function addToDisplay(book) {
     if (!document.getElementById(`book-${book.id}`)) {
         const bookCard = document.createElement("div");
+        const deleteButton = document.createElement("button");
+        deleteButton.classList.add("delete-book");
+        deleteButton.innerText = "Delete";
         bookCard.id = `book-${book.id}`;
 
         const bookUl = document.createElement("ul");
-        const titleLi = document.createElement("li");
-        const authorLi = document.createElement("li");
-        const pagesLi = document.createElement("li");
-        const readLi = document.createElement("li");
 
-        // Set text content for each list item
-        titleLi.textContent = `Title: ${book.name}`;
-        authorLi.textContent = `Author: ${book.author}`;
-        pagesLi.textContent = `Pages: ${book.pages}`;
-        readLi.textContent = `Read: ${book.hasRead ? "Yes" : "No"}`;
+        // Create li elements with span labels
+        function createListItem(label, text) {
+            const li = document.createElement("li");
+            const span = document.createElement("span");
+            span.textContent = `${label}: `;
+            li.appendChild(span);
+            li.appendChild(document.createTextNode(text));
+            return li;
+        }
 
-        // Append list items to the UL
-        bookUl.appendChild(titleLi);
-        bookUl.appendChild(authorLi);
-        bookUl.appendChild(pagesLi);
-        bookUl.appendChild(readLi);
+        // Create and append li items to ul
+        bookUl.appendChild(createListItem("Title", book.name));
+        bookUl.appendChild(createListItem("Author", book.author));
+        bookUl.appendChild(createListItem("Pages", book.pages));
+        bookUl.appendChild(createListItem("Read", book.hasRead ? "Yes" : "No"));
 
-        // Append UL to the book card
+        // Append ul to book card
         bookCard.appendChild(bookUl);
-
-        // Append the book card to the displayBooks
+        bookCard.appendChild(deleteButton);
+        // append to displayBooks
         displayBooks.appendChild(bookCard);
     }
 }
