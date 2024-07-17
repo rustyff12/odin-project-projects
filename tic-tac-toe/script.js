@@ -12,25 +12,53 @@ let playerOneTurn = true;
 let playerTwoTurn = false;
 
 gameBoard.addEventListener("click", (e) => {
+    startGame.classList.add("disabled");
+    const disableAll = () => {
+        gameBoard.classList.add("disabled");
+    };
+
     const boxId = e.target.id;
-    const boxRow = e.target;
-    console.log(boxId);
-    console.log("====");
-    console.log(boxRow);
+    const row = e.target.getAttribute("data-row");
+    const col = e.target.getAttribute("data-col");
+
     const toDisable = document.querySelector(`#${boxId}`);
     toDisable.classList.add("disabled");
     if (playerOneTurn) {
         toDisable.textContent = Player1.icon;
         playerOneTurn = false;
         playerTwoTurn = true;
-        // GameBoard.gameBoard
+        GameBoard.gameBoard[row][col] = Player1.icon;
     } else if (playerTwoTurn) {
         toDisable.textContent = Player2.icon;
         playerOneTurn = true;
         playerTwoTurn = false;
+        GameBoard.gameBoard[row][col] = Player2.icon;
     }
 
-    console.log(GameBoard.gameBoard);
+    const checkState = checkWin(GameBoard.gameBoard);
+    const gameState = document.querySelector("#game-state");
+
+    if (checkState === "X") {
+        playerOneScore.classList.add("hidden");
+        playerTwoScore.classList.add("hidden");
+        gameState.classList.remove("hidden");
+        gameState.textContent = "Player 1 wins!";
+        Player1.score += 1;
+        disableAll();
+    } else if (checkState === "O") {
+        playerOneScore.classList.add("hidden");
+        playerTwoScore.classList.add("hidden");
+        gameState.classList.remove("hidden");
+        gameState.textContent = "Player 1 wins!";
+        Player2.score += 1;
+        disableAll();
+    } else if (checkState === "T") {
+        playerOneScore.classList.add("hidden");
+        playerTwoScore.classList.add("hidden");
+        gameState.classList.remove("hidden");
+        gameState.textContent = "Game is tied!";
+        disableAll();
+    }
 });
 
 const GameBoard = {
@@ -54,6 +82,8 @@ const Player2 = {
 };
 
 startGame.addEventListener("click", () => {
+    gameBoard.classList.remove("disabled");
+
     const playerOneTextInput = document.querySelector("#player1").value;
     const playerTwoTextInput = document.querySelector("#player2").value;
     Player1.name = playerOneTextInput;
@@ -64,10 +94,6 @@ startGame.addEventListener("click", () => {
     playerTwoScore.textContent = playerTwoTextInput
         ? `${Player2.name}: ${Player2.score}`
         : `Player 2: ${Player2.score}`;
-});
-
-restartGame.addEventListener("click", () => {
-    console.log("restart");
 });
 
 const checkWin = (grid) => {
@@ -104,4 +130,36 @@ const checkWin = (grid) => {
     return "T"; // Tie, no empty cells and no winner
 };
 
-// console.log(GameBoard.gameBoard);
+restartGame.addEventListener("click", () => {
+    const playerOneTextInput = document.querySelector("#player1").value;
+    const playerTwoTextInput = document.querySelector("#player2").value;
+    const gameState = document.querySelector("#game-state");
+
+    playerOneScore.classList.remove("hidden");
+    playerTwoScore.classList.remove("hidden");
+    gameState.classList.add("hidden");
+    gameBoard.classList.remove("disabled");
+    startGame.classList.remove("disabled");
+
+    playerOneScore.textContent = playerOneTextInput
+        ? `${Player1.name}: ${Player1.score}`
+        : `Player 1: ${Player1.score}`;
+    playerTwoScore.textContent = playerTwoTextInput
+        ? `${Player2.name}: ${Player2.score}`
+        : `Player 2: ${Player2.score}`;
+
+    GameBoard.gameBoard = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "],
+    ];
+
+    document.querySelectorAll(".game-box").forEach((element) => {
+        element.textContent = "";
+        if (element.classList.contains("disabled")) {
+            element.classList.remove("disabled");
+        }
+    });
+    playerOneTurn = true;
+    playerTwoTurn = false;
+});
