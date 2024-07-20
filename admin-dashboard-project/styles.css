@@ -1,0 +1,88 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-clr: #0daade;
+    --accent: #f6b708;
+    --white: #f4f4f4;
+    --black: #151414;
+    --background-filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(0%) hue-rotate(180deg) brightness(100%) contrast(100%);
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+}
+
+/* Dashboard */
+.dashboard-container {
+    background-color: var(--main-clr);
+    color: var(--white);
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dashboard-icon,
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.dashboard-icon > img {
+    width: 35px;
+    filter: var(--background-filter);
+}
+
+.dashboard-icon > h1 {
+    font-size: 1.25rem;
+}
+
+.icons > img {
+    width: 25px;
+    filter: var(--background-filter);
+}
+
+.icons > p {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.dashboard-main,
+.dashboard-secondary {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Main CContent Grid */
+.main-content-container {
+    grid-row: 1 / 3;
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+}
+
+/* Nav container */
+.nav-container {
+    background-color: red;
+}
+/* Main container */
+.main-container {
+    background-color: green;
+}
