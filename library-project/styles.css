@@ -12,10 +12,13 @@
     --white: #eae0e0;
     --accent: #0f77e6;
     --secondary: #0abc7e;
+    /* --secondary: rgb(10, 188, 126); */
+    --black: #000000;
+    --light-dark: #262626;
 }
 
 body {
-    background: black;
+    background: var(--black);
     color: var(--white);
     display: flex;
     flex-direction: column;
@@ -23,9 +26,11 @@ body {
 }
 
 h1 {
-    margin: 0 auto;
-    margin-top: 1rem;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    /* background-color: var(--black); */
+    padding: 1rem 0rem;
+    /* border-bottom: 2px solid var(--secondary); */
 }
 
 #modal-button {
@@ -93,6 +98,11 @@ h1 {
     margin-bottom: 2rem;
     font-size: 1rem;
     border-radius: 5px;
+    padding: 0.5rem;
+}
+
+#new-book-form input:invalid {
+    border: 1px solid var(--danger);
 }
 
 .read {
@@ -176,6 +186,7 @@ button#submit:hover {
         grid-auto-rows: auto;
         grid-template-columns: 1fr;
         width: 90vw;
+        max-width: 1000px;
     }
     .display-books div {
         width: 100%;
@@ -205,5 +216,6 @@ button#submit:hover {
 
     #modal-button {
         width: 30%;
+        max-width: 300px;
     }
 }

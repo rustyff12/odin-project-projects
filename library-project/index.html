@@ -7,38 +7,53 @@
         <link rel="stylesheet" href="./styles.css" />
     </head>
     <body>
-        <h1>Book Library</h1>
-        <div class="display-books">
-            <div>
-                <ul>
-                    <li><span>Title: </span>Harry Potter</li>
-                    <li><span>Author: </span>J.K Rowling</li>
-                    <li><span>Pages: </span>5</li>
-                    <li><span>Read: </span>Yes</li>
-                </ul>
-                <button class="delete-book">Delete</button>
-            </div>
-        </div>
+        <h1>My Reading List</h1>
+        <div class="display-books"></div>
 
-        <button id="modal-button">Add Book</button>
+        <button type="button" id="modal-button">Add Book</button>
 
         <div class="modal">
-            <form id="new-book-form">
+            <form id="new-book-form" novalidate>
                 <div class="close-modal"><span>&times;</span></div>
                 <label for="name">Name:</label>
-                <input id="name" type="text" />
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Enter book name"
+                />
+
                 <label for="author">Author:</label>
-                <input id="author" type="text" />
+                <input
+                    id="author"
+                    name="author"
+                    type="text"
+                    required
+                    placeholder="Enter author name"
+                />
+
                 <label for="pages">Number of pages:</label>
-                <input id="pages" type="number" />
+                <input
+                    id="pages"
+                    name="pages"
+                    type="number"
+                    required
+                    min="1"
+                    placeholder="Enter number of pages"
+                />
                 <div class="read">
                     <p>Have you read it?</p>
                     <div>
-                        <input type="radio" name="has-read" id="has-read" />
+                        <input type="radio" name="read-status" id="has-read" />
                         <label for="has-read">Yes</label>
                     </div>
                     <div>
-                        <input type="radio" name="hasnt-read" id="hasnt-read" />
+                        <input
+                            type="radio"
+                            name="read-status"
+                            id="hasnt-read"
+                        />
                         <label for="hasnt-read">No</label>
                     </div>
                 </div>

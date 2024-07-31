@@ -5,26 +5,30 @@ const modal = document.querySelector(".modal");
 const modalBtn = document.querySelector("#modal-button");
 const close = document.querySelector(".close-modal");
 
+let nextId = 2;
+displayBooks.addEventListener("click", (e) => {
+    const div = e.target.closest("div");
+    const divId = e.target.closest("div").id;
+    const deleteId = e.target.id;
+    // CHeck to see delete and div match
+    if (divId.split("-")[1] === deleteId.split("-")[1]) {
+        div.remove();
+    }
+    // If list is empty, reset id
+    if (displayBooks.childElementCount === 0) {
+        nextId = 1;
+    }
+});
+
 modalBtn.addEventListener("click", () => {
-    console.log("button clicked");
     modal.classList.add("active");
 });
 
 close.addEventListener("click", () => {
-    console.log("close clicked");
     modal.classList.remove("active");
 });
 
-const myLibrary = [
-    {
-        id: 1,
-        name: "Sample Book",
-        author: "Sample Author",
-        pages: 200,
-        hasRead: true,
-    },
-];
-let nextId = 2;
+const myLibrary = [];
 
 function Book(name, author, pages, hasRead) {
     this.id = nextId++;
@@ -33,16 +37,16 @@ function Book(name, author, pages, hasRead) {
     this.pages = pages;
     this.hasRead = hasRead ? true : false;
 }
-myLibrary.push(new Book("Sample Book", "Sample Author", 200, true));
 
 newBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
-
+    // Get input values
     const title = document.getElementById("name").value;
     const author = document.getElementById("author").value;
     const pages = document.getElementById("pages").value;
     const hasRead = document.getElementById("has-read").checked;
 
+    // New instance of Book
     const newBook = new Book(title, author, pages, hasRead);
     addBookToLibrary(newBook);
     addToDisplay(newBook);
@@ -61,7 +65,7 @@ function addToDisplay(book) {
         deleteButton.classList.add("delete-book");
         deleteButton.innerText = "Delete";
         bookCard.id = `book-${book.id}`;
-
+        deleteButton.id = `delete-${book.id}`;
         const bookUl = document.createElement("ul");
 
         // Create li elements with span labels
